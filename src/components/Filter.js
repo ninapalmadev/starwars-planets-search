@@ -23,8 +23,8 @@ function Filters() {
     numetricFilter(numetrics);
   }, [numetricFilter, numetrics]);
 
-  const handleNumetricFilter = useCallback(({ target: { name, value } }) => {
-    setNumericFilter({ [name]: value });
+  const handleNumetricFilter = useCallback(({ target: { name, value: tgtValue } }) => {
+    setNumericFilter({ [name]: tgtValue });
   }, []);
 
   const removeAll = useCallback(() => removeNumericFilter('All'), [removeNumericFilter]);
