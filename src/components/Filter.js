@@ -8,6 +8,8 @@ function Filters() {
     numetricFilter,
     removeNumericFilter,
     columns,
+    // order,
+    // setOrder,
   } = useContext(PlanetsContext);
 
   const handleChange = useCallback(({ target: { value } }) => {
@@ -91,14 +93,58 @@ function Filters() {
         >
           Filtrar
         </button>
+        {/* <div>
+          <label htmlFor="Ordenar">
+            Ordenar
+            <select
+              data-testid="column-sort"
+              name="ordenar"
+              value={ order.column }
+              onChange={ ({ target }) => setOrder({ ...order, column: target.value }) }
+            >
+              {columns.map((option) => (
+                <option key={ option } value={ option }>{option}</option>
+              ))}
+            </select>
+          </label>
+          <label htmlFor="Ascendente">
+            <input
+              type="radio"
+              data-testid="column-sort-input-asc"
+              name="ASC"
+              value="ASC"
+              checked={ order.sort === 'ASC' }
+              onChange={ ({ target }) => setOrder({ ...order, sort: target.value }) }
+            />
+            Ascendente
+          </label>
+          <label htmlFor="Descendente">
+            <input
+              type="radio"
+              data-testid="column-sort-input-desc"
+              name="DESC"
+              value="DESC"
+              checked={ order.sort === 'DESC' }
+              onChange={ ({ target }) => setOrder({ ...order, sort: target.value }) }
+            />
+            Descendente
+          </label>
+          <button
+            type="button"
+            name="Ordenar"
+            data-testid="column-sort-button"
+            onClick={ () => setOrder({ ...order }) }
+          >
+            ORDENAR
+          </button>
+        </div> */}
         <button
           type="button"
           data-testid="button-remove-filters"
           onClick={ removeAll }
         >
-          Remover Filtros
+          Remover
         </button>
-
       </section>
     </div>
   );

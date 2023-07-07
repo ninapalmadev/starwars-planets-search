@@ -49,7 +49,7 @@ describe('9 - Ordene as colunas de forma ascendente ou descendente', () => {
     sortByColumn('population', 'desc');
 
     const expectedPlanets = ['Coruscant', 'Naboo', 'Alderaan', 'Kamino', 'Endor', 'Bespin', 'Tatooine', 'Yavin IV'];
-    const expectedPlanetsWithUnknownValues = ['Dagobah', 'Hoth'];
+    const expectedPlanetsWithUnknownValues = ['Hoth', 'Dagobah'];
 
     cy.getByTestId(PLANET_NAME).each((el, index) => {
       if (expectedPlanets[index]) {
@@ -64,7 +64,7 @@ describe('9 - Ordene as colunas de forma ascendente ou descendente', () => {
     sortByColumn('population', 'asc');
 
     const expectedPlanets = ['Yavin IV', 'Tatooine', 'Bespin', 'Endor', 'Kamino', 'Alderaan', 'Naboo', 'Coruscant'];
-    const expectedPlanetsWithUnknownValues = ['Dagobah', 'Hoth'];
+    const expectedPlanetsWithUnknownValues = ['Hoth', 'Dagobah'];
 
     cy.getByTestId(PLANET_NAME).each((el, index) => {
       if (expectedPlanets[index]) {

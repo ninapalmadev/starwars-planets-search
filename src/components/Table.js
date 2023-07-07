@@ -6,6 +6,7 @@ function Table() {
 
   return (
     <div>
+      <h2>Star Wars Planets Search</h2>
       <table>
         <thead>
           <tr>

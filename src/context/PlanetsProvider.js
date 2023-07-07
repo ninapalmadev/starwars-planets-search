@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import PlanetsContext from './PlanetsContext';
 import fetchPlanetsAPI from '../services/planetsAPI';
-import { filterBy, sortBy } from '../helper/helperFunctions';
+import { filterBy } from '../helper/helperFunctions';
 
 export const DEFAULT_COLUMNS = [
   'population',
@@ -11,9 +11,6 @@ export const DEFAULT_COLUMNS = [
   'rotation_period',
   'surface_water',
 ];
-
-const A_COMES_FIRST_THEN_B = -1;
-const B_COMES_FIRST_THEN_A = 1;
 
 function PlanetProvider({ children }) {
   const [data, setData] = useState([]);
@@ -38,23 +35,8 @@ function PlanetProvider({ children }) {
       .filter((planet) => (
         filterBy.name(planetNames, planet)
         && filterBy.numeric(numetrics, planet)));
-
     setData(filteredData);
   }, [planetNames, planets, numetrics]);
-
-  const sortPlanets = useCallback((sortOrder) => {
-    const sortedData = [...data].sort((a, b) => {
-      const firstLetter = Number(a[sortOrder.column]);
-      if (!firstLetter) return B_COMES_FIRST_THEN_A;
-
-      const lastLetter = Number(b[sortOrder.column]);
-      if (!lastLetter) return A_COMES_FIRST_THEN_B;
-
-      return sortBy[sortOrder.order](firstLetter, lastLetter);
-    });
-
-    setData(sortedData);
-  }, [data]);
 
   const numetricFilter = useCallback((filter) => {
     setColumns(
@@ -68,18 +50,46 @@ function PlanetProvider({ children }) {
       setColumns(DEFAULT_COLUMNS);
       return setNumericFilters([]);
     }
-
-    setColumns((prevOptions) => [...prevOptions, filter.column]);
-    setNumericFilters((prevState) => (
-      prevState.filter((prevFilter) => prevFilter.column !== filter.column)));
+    // setColumns((prevOptions) => [...prevOptions, filter.column]);
+    // setNumericFilters((prevState) => (
+    //   prevState.filter((prevFilter) => prevFilter.column !== filter.column)));
   }, []);
+
+  const [order, setOrder] = useState({
+    column: 'population',
+    sort: '',
+  });
+
+  // const ordenaDados = () => {
+  //   const { column, sort } = order;
+  //   const knownValues = data
+  //     .filter((planet) => planet[order.column] !== 'unknown');
+  //   const unknownValues = data
+  //     .filter((planet) => planet[order.column] === 'unknown');
+  //   let sortp;
+  //   if (sort === 'ASC') {
+  //     sortp = knownValues
+  //       .sort((a, b) => a[column] - b[column]);
+  //   } else {
+  //     sortp = knownValues
+  //       .sort((a, b) => b[column] - a[column]);
+  //   }
+  //   const sortPlanets = [...sortp, ...unknownValues];
+  //   setData(sortPlanets);
+  // };
+
+  // useEffect(() => {
+  //   ordenaDados();
+  // }, [order]);
 
   const allPlanetsContext = {
     data,
     tableColumns,
     columns,
+    order,
+    setOrder,
+    setData,
     setPlanetNames,
-    sortPlanets,
     numetricFilter,
     setNumericFilters,
     removeNumericFilter,

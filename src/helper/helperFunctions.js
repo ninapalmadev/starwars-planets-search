@@ -10,11 +10,3 @@ export const filterBy = {
       compareBy[comparison](Number(planet[column]), Number(value))))),
   name: (name, planet) => planet.name.toLowerCase().includes(name.toLowerCase()),
 };
-
-const A_COMES_FIRST_THEN_B = -1;
-const B_COMES_FIRST_THEN_A = 1;
-
-export const sortBy = {
-  ASC: (a, b) => (a < b ? A_COMES_FIRST_THEN_B : B_COMES_FIRST_THEN_A),
-  DESC: (a, b) => (a > b ? A_COMES_FIRST_THEN_B : B_COMES_FIRST_THEN_A),
-};
