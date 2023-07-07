@@ -1,9 +1,14 @@
-import React, { useContext, useCallback, useReducer } from 'react';
+import React, { useContext, useEffect, useCallback, useReducer } from 'react';
 import PlanetsContext from '../context/PlanetsContext';
 
 function Filters() {
-  const { filters: { planetNames }, setPlanetNames,
-    numetricFilter, removeNumericFilter, columns } = useContext(PlanetsContext);
+  const {
+    filters: { planetNames },
+    setPlanetNames,
+    numetricFilter,
+    removeNumericFilter,
+    columns,
+  } = useContext(PlanetsContext);
 
   const handleChange = useCallback(({ target: { value } }) => {
     setPlanetNames(value);
@@ -26,6 +31,10 @@ function Filters() {
   const handleNumetricFilter = useCallback(({ target: { name, value: tgtValue } }) => {
     setNumericFilter({ [name]: tgtValue });
   }, []);
+
+  useEffect(() => {
+    setNumericFilter({ column: columns[0] });
+  }, [columns]);
 
   const removeAll = useCallback(() => removeNumericFilter('All'), [removeNumericFilter]);
 

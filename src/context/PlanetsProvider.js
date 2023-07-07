@@ -22,6 +22,7 @@ function PlanetProvider({ children }) {
   const [planetNames, setPlanetNames] = useState('');
   const [numetrics, setNumericFilters] = useState([]);
   const [columns, setColumns] = useState(DEFAULT_COLUMNS);
+
   useEffect(() => {
     const fetchPlanets = async () => {
       const results = await fetchPlanetsAPI();
@@ -80,6 +81,7 @@ function PlanetProvider({ children }) {
     setPlanetNames,
     sortPlanets,
     numetricFilter,
+    setNumericFilters,
     removeNumericFilter,
     filters: {
       numetrics,
