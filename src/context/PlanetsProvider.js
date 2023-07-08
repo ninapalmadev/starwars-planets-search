@@ -50,37 +50,15 @@ function PlanetProvider({ children }) {
       setColumns(DEFAULT_COLUMNS);
       return setNumericFilters([]);
     }
-    // setColumns((prevOptions) => [...prevOptions, filter.column]);
-    // setNumericFilters((prevState) => (
-    //   prevState.filter((prevFilter) => prevFilter.column !== filter.column)));
-  }, []);
+    setColumns((prevOptions) => [...prevOptions, filter.column]);
+    setNumericFilters((prevState) => (
+      prevState.filter((prevFilter) => prevFilter.column !== filter.column)));
+  }, [setColumns, setNumericFilters]);
 
   const [order, setOrder] = useState({
     column: 'population',
     sort: '',
   });
-
-  // const ordenaDados = () => {
-  //   const { column, sort } = order;
-  //   const knownValues = data
-  //     .filter((planet) => planet[order.column] !== 'unknown');
-  //   const unknownValues = data
-  //     .filter((planet) => planet[order.column] === 'unknown');
-  //   let sortp;
-  //   if (sort === 'ASC') {
-  //     sortp = knownValues
-  //       .sort((a, b) => a[column] - b[column]);
-  //   } else {
-  //     sortp = knownValues
-  //       .sort((a, b) => b[column] - a[column]);
-  //   }
-  //   const sortPlanets = [...sortp, ...unknownValues];
-  //   setData(sortPlanets);
-  // };
-
-  // useEffect(() => {
-  //   ordenaDados();
-  // }, [order]);
 
   const allPlanetsContext = {
     data,
